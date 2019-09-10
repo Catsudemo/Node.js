@@ -1,0 +1,6 @@
+Welcome to the To Do List CLI app. 
+Here are the functions you can use in this app. 
+Add - Type add plus the reminder you want to add to your list. E.g. add buy milk. 
+Remove - Type remove plus the number of the reminder you want to remove from your list. E.g. remove 2.
+List - Type list to read everything currently on your list. 
+Reset - Type reset to remove everything from your list. Don't worry, you'll be asked to confirm before resetting. 
