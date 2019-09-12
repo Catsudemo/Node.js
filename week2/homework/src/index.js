@@ -2,7 +2,6 @@
 
 var fs = require('fs')
 let filename = './todolist.txt';
-let currentList = fs.readFileSync(filename, "utf-8").toString().split("\n");
 let whichFunction = process.argv[2];
 let userInput = process.argv.splice(3).join(' ')
 let helpfile = fs.readFileSync('./helpfile.txt', "utf-8")
@@ -15,10 +14,17 @@ const {
   confirmReset
 } = require('./modules');
 
+if (!fs.existsSync(filename)) {
+  fs.writeFileSync(filename, '', function (err) {
+    if (err) throw error;
+  })
+}
+
+let currentList = fs.readFileSync(filename, "utf-8").toString().split("\n");
 
 function writeFile(file, list) {
   let updateList = list.join("\n")
-  fs.writeFile(file, updateList, function (err) {
+  fs.writeFileSync(file, updateList, function (err) {
     if (err) throw error;
   })
 }
