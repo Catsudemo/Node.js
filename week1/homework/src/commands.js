@@ -1,25 +1,24 @@
-
-function whatURL(command, state) {
+function whatCommand(command, state) {
   switch (command) {
-    case 'state':
+    case '/state':
       console.log('checked state')
       return state;
-    case 'add':
+    case '/add':
       state = state + 1;
       console.log('added 1')
       return state;
-    case 'subtract':
+    case '/subtract':
       state = state - 1;
       console.log('subtracted 1')
       return state;
-    case 'reset':
+    case '/reset':
       state = 10;
       console.log('reset state')
       return state;
     default:
-      return state;
+      console.log('Command not recognized')
+      throw new Error(`Command ${command} not recognized. State is ${state}`);
 
   }
 }
-
-module.exports = whatURL
+module.exports = whatCommand

@@ -1,38 +1,26 @@
 'use strict';
 
 const http = require('http');
-const whatIDO = require('./commands')
-
-/* `createServer` MUST return an instance of `http.Server` otherwise the tests
- * will fail.
- */
+const whatCommand = require('./commands')
 
 function createServer(PORT) {
   let state = 10;
 
-
   const server = http.createServer((request, response) => {
-    // TODO: Write your homework code here
     const URLString = request.url;
-    const URLArray = URLString.split('/').filter(command => ["state", "add", "subtract", "reset"].includes(command));
-    console.log('Initiating commands')
+    console.log(URLString)
+    try {
+      state = whatCommand(URLString, state)
 
-    for (const command of URLArray) {
-      state = whatIDO(command, state)
+      response.writeHead(200, { 'Content-Type': 'application/json' });
+      response.end(JSON.stringify({ response: `The state is ${state}` }))
     }
-
-    response.writeHead(200, { 'Content-Type': 'application/json' });
-    response.end(JSON.stringify({ response: `The answer is ${state}` }))
+    catch (err) {
+      response.writeHead(406, { 'Content-Type': 'application/json' });
+      response.end(JSON.stringify({ response: `${err}` }))
+    }
   });
   server.setTimeout(100)
-
-
-
-
-
-
-
-
   return server;
 }
 
