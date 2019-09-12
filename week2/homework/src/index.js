@@ -4,17 +4,16 @@ var fs = require('fs')
 let filename = './todolist.txt';
 let currentList = fs.readFileSync(filename, "utf-8").toString().split("\n");
 let whichFunction = process.argv[2];
-let rawInput = process.argv.splice(3).join(' ')
-let userInput = `${rawInput}`
+let userInput = process.argv.splice(3).join(' ')
 let helpfile = fs.readFileSync('./helpfile.txt', "utf-8")
 
 const {
   addToList,
   removeFromList,
+  listItems,
   resetList,
   confirmReset
 } = require('./modules');
-
 
 
 function writeFile(file, list) {
@@ -24,11 +23,9 @@ function writeFile(file, list) {
   })
 }
 
-
-
-function whichDo(file, list, theFunction, input) {
+function runCommand(list, theFunction, input) {
   if (theFunction == 'add') {
-    addToList(file, list, input)
+    addToList(list, input)
     console.log(`Okay, ${input} is on your list`)
   }
   else if (theFunction == 'remove') {
@@ -36,8 +33,9 @@ function whichDo(file, list, theFunction, input) {
     console.log(`Okay, item ${input} is no longer on your list`)
   }
   else if (theFunction == 'list') {
-    console.log('The items on your list are: ', list)
+    listItems(list)
   }
+
   else if (theFunction == 'confirm') {
     resetList(list);
   }
@@ -51,7 +49,7 @@ function whichDo(file, list, theFunction, input) {
 }
 
 function runList(file, list, theFunction, input) {
-  whichDo(file, list, theFunction, input);
+  runCommand(list, theFunction, input);
   writeFile(file, list)
 
 }

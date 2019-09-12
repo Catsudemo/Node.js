@@ -1,4 +1,4 @@
-function addToList(file, list, input) {
+function addToList(list, input) {
   list.push(input)
   return list;
 }

@@ -1,5 +1,7 @@
 function removeFromList(list, input) {
-  list.splice(input, 1)
+  const number = (parseInt(input, 10));
+  console.log(number)
+  list.splice((number - 1), 1)
   return list
 }
 
