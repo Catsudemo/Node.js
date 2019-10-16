@@ -18,7 +18,6 @@ function whatCommand(command, state) {
     default:
       console.log('Command not recognized')
       throw new Error(`Command ${command} not recognized. State is ${state}`);
-
   }
 }
 module.exports = whatCommand
