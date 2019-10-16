@@ -10,8 +10,7 @@ const {
   addToList,
   removeFromList,
   listItems,
-  resetList,
-  confirmReset
+  resetList
 } = require('./modules');
 
 if (!fs.existsSync(filename)) {
@@ -42,12 +41,8 @@ function runCommand(list, theFunction, input) {
     listItems(list)
   }
 
-  else if (theFunction == 'confirm') {
-    resetList(list);
-  }
-
   else if (theFunction == 'reset') {
-    confirmReset(list)
+    resetList(list);
   }
   else {
     console.log(helpfile)
