@@ -16,8 +16,9 @@ function whatCommand(command, state) {
       console.log('reset state')
       return state;
     default:
-      console.log('Command not recognized')
-      throw new Error(`Command ${command} not recognized. State is ${state}`);
+      response.writeHead(404, { 'Content-Type': 'application/json' });
+      response.end(JSON.stringify({ response: 'Not found COMMAND' }))
+      return response;
   }
 }
 module.exports = whatCommand

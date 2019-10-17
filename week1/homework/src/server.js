@@ -13,11 +13,11 @@ function createServer(PORT) {
       state = whatCommand(URLString, state)
 
       response.writeHead(200, { 'Content-Type': 'application/json' });
-      response.end(JSON.stringify({ response: `The state is ${state}` }))
+      response.end(JSON.stringify({ state: state }))
     }
     catch (err) {
-      response.writeHead(406, { 'Content-Type': 'application/json' });
-      response.end(JSON.stringify({ response: `${err}` }))
+      response.writeHead(404, { 'Content-Type': 'application/json' });
+      response.end(JSON.stringify({ error: 'Not found' }))
     }
   });
   server.setTimeout(100)
